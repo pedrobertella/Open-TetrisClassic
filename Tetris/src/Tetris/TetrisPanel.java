@@ -148,6 +148,7 @@ public class TetrisPanel extends JPanel implements Runnable{
 		
 
 	}
+        @Override
 	public void paintComponent(Graphics g){
 		g.drawImage(bg, 0, 0, 800, 720, null);
 		Frame.board.paint(g);
@@ -194,6 +195,10 @@ public class TetrisPanel extends JPanel implements Runnable{
 	
 		if(lose){
 		g.drawImage(go, 75, 0, 400, 720, null);
+		}
+                
+                if(!lose && !pause && !Frame.board.isStarted){
+                    g.drawImage(go, 75, 0, 400, 720, null);
 		}
 		
         if(nextPiece.getShape() == Tetrominoes.LineShape){
