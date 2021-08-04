@@ -25,6 +25,7 @@ public class TetrisPanel extends JPanel implements Runnable{
 	public static Image bg;
 	public static Image go;
 	public static Image ps;
+        public static Image we;
 	public static Image[] box;
 	public static Music aTheme;
 	public static Music bTheme;
@@ -51,6 +52,7 @@ public class TetrisPanel extends JPanel implements Runnable{
 		bg = new ImageIcon("graphics/gamebackgroundgamea.png").getImage();
 		go = new ImageIcon("graphics/gameover.png").getImage();
 		ps = new ImageIcon("graphics/pause.png").getImage();
+                we = new ImageIcon("graphics/welcome.png").getImage();
 		
 		box = new Image[8];
 		
@@ -199,7 +201,7 @@ public class TetrisPanel extends JPanel implements Runnable{
 		}
                 
                 if(!lose && !pause && !Frame.board.isStarted){
-                    g.drawImage(go, 75, 0, 400, 720, null);
+                    g.drawImage(we, 75, 0, 400, 720, null);
 		}
 		
         if(nextPiece.getShape() == Tetrominoes.LineShape){
