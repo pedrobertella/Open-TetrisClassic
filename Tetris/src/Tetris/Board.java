@@ -1,13 +1,10 @@
 package Tetris;
 
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -17,9 +14,7 @@ import javax.swing.Timer;
 
 import Tetris.Shape.Tetrominoes;
 
-
 public class Board extends JPanel implements ActionListener {
-
 
     final int BoardWidth = 10;
     final int BoardHeight = 18;
@@ -39,65 +34,59 @@ public class Board extends JPanel implements ActionListener {
     public boolean blinking = false;
     public boolean first = false;
 
-
-
     public Board() {
 
-     
-       setBounds(80, 50, 400, 720);
-       curPiece = new Shape();
-       nextPiece = new Shape();
-       timer = new Timer(400, this);
-        
-       box[1] = new ImageIcon("graphics/pieces/1boxP1.png").getImage();
-       box[2] = new ImageIcon("graphics/pieces/2box.png").getImage();
-       box[3] = new ImageIcon("graphics/pieces/3box.png").getImage();
-       box[4] = new ImageIcon("graphics/pieces/4box.png").getImage();
-       box[5] = new ImageIcon("graphics/pieces/5box.png").getImage();
-       box[6] = new ImageIcon("graphics/pieces/6box.png").getImage();
-       box[7] = new ImageIcon("graphics/pieces/7box.png").getImage();
+        setBounds(80, 50, 400, 720);
+        curPiece = new Shape();
+        nextPiece = new Shape();
+        timer = new Timer(400, this);
 
-       board = new Tetrominoes[BoardWidth * BoardHeight];
-       clearBoard();  
+        box[1] = new ImageIcon("graphics/pieces/1boxP1.png").getImage();
+        box[2] = new ImageIcon("graphics/pieces/2box.png").getImage();
+        box[3] = new ImageIcon("graphics/pieces/3box.png").getImage();
+        box[4] = new ImageIcon("graphics/pieces/4box.png").getImage();
+        box[5] = new ImageIcon("graphics/pieces/5box.png").getImage();
+        box[6] = new ImageIcon("graphics/pieces/6box.png").getImage();
+        box[7] = new ImageIcon("graphics/pieces/7box.png").getImage();
+
+        board = new Tetrominoes[BoardWidth * BoardHeight];
+        clearBoard();
     }
 
     public void keyPressed(KeyEvent e) {
-    	
-    	
 
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             pause();
-    }
-        
-        if (isPaused)
-            return;
-        
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-        	TetrisPanel.move.play();
-            tryMove(curPiece, curX - 1, curY);
-    }
-            if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            	TetrisPanel.move.play();
-            tryMove(curPiece, curX + 1, curY);
-}       
-            if(e.getKeyCode() ==KeyEvent.VK_D){
-            tryMove(curPiece.rotateRight(), curX, curY);
-            }          
-            if(e.getKeyCode() ==KeyEvent.VK_A){
-            tryMove(curPiece.rotateLeft(), curX, curY);
-            }
-            if(e.getKeyCode() ==KeyEvent.VK_UP){
-            dropDown();
-            }
-            if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            	TetrisPanel.move.play();
-            oneLineDown();
-            }
         }
 
-    
+        if (isPaused) {
+            return;
+        }
 
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            TetrisPanel.move.play();
+            tryMove(curPiece, curX - 1, curY);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            TetrisPanel.move.play();
+            tryMove(curPiece, curX + 1, curY);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            tryMove(curPiece.rotateRight(), curX, curY);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            tryMove(curPiece.rotateLeft(), curX, curY);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            dropDown();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            TetrisPanel.move.play();
+            oneLineDown();
+        }
+    }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
             isFallingFinished = false;
@@ -107,16 +96,22 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    int squareWidth() {
+        return (int) getSize().getWidth() / BoardWidth;
+    }
 
-    int squareWidth() { return (int) getSize().getWidth() / BoardWidth; }
-    int squareHeight() { return (int) getSize().getHeight() / BoardHeight; }
-    Tetrominoes shapeAt(int x, int y) { return board[(y * BoardWidth) + x]; }
+    int squareHeight() {
+        return (int) getSize().getHeight() / BoardHeight;
+    }
 
+    Tetrominoes shapeAt(int x, int y) {
+        return board[(y * BoardWidth) + x];
+    }
 
-    public void start()
-    {
-        if (isPaused)
+    public void start() {
+        if (isPaused) {
             return;
+        }
 
         isStarted = true;
         isFallingFinished = false;
@@ -127,44 +122,42 @@ public class Board extends JPanel implements ActionListener {
         linesComp = 0;
         timer.setDelay(400);
         clearBoard();
-        
+
         first = true;
         newPiece();
-        
+
         timer.start();
     }
 
-    private void pause()
-    {
-        if (!isStarted)
+    private void pause() {
+        if (!isStarted) {
             return;
+        }
 
         isPaused = !isPaused;
         if (isPaused) {
-        
+
         } else {
             timer.start();
             statusbar.setText(String.valueOf(numLinesRemoved));
         }
-      
+
     }
 
-    public void paint(Graphics g)
-    { 
-        
+    @Override
+    public void paint(Graphics g) {
 
         Dimension size = getSize();
         int boardTop = (int) size.getHeight() - BoardHeight * squareHeight();
 
-
         for (int i = 0; i < BoardHeight; ++i) {
             for (int j = 0; j < BoardWidth; ++j) {
                 Tetrominoes shape = shapeAt(j, BoardHeight - i - 1);
-                if (shape != Tetrominoes.NoShape)
-                    drawSquare(g, 0 + j * squareWidth() +75,
-                               boardTop + i * squareHeight(), shape);
-                	
-               
+                if (shape != Tetrominoes.NoShape) {
+                    drawSquare(g, 0 + j * squareWidth() + 75,
+                            boardTop + i * squareHeight(), shape);
+                }
+
             }
         }
 
@@ -172,42 +165,39 @@ public class Board extends JPanel implements ActionListener {
             for (int i = 0; i < 4; ++i) {
                 int x = curX + curPiece.x(i);
                 int y = curY - curPiece.y(i);
-                drawSquare(g, 0 + x * squareWidth() +75,
-                           boardTop + (BoardHeight - y - 1) * squareHeight(),
-                           curPiece.getShape());
+                drawSquare(g, 0 + x * squareWidth() + 75,
+                        boardTop + (BoardHeight - y - 1) * squareHeight(),
+                        curPiece.getShape());
             }
         }
-        
 
     }
 
-    private void dropDown()
-    {
+    private void dropDown() {
         int newY = curY;
         while (newY > 0) {
-            if (!tryMove(curPiece, curX, newY - 1))
+            if (!tryMove(curPiece, curX, newY - 1)) {
                 break;
+            }
             --newY;
         }
         pieceDropped();
     }
 
-    private void oneLineDown()
-    {
-        if (!tryMove(curPiece, curX, curY - 1))
+    private void oneLineDown() {
+        if (!tryMove(curPiece, curX, curY - 1)) {
             pieceDropped();
+        }
     }
 
-
-    public void clearBoard()
-    {
-        for (int i = 0; i < BoardHeight * BoardWidth; ++i)
+    public final void clearBoard() {
+        for (int i = 0; i < BoardHeight * BoardWidth; ++i) {
             board[i] = Tetrominoes.NoShape;
+        }
     }
 
-    private void pieceDropped()
-    {
-    	TetrisPanel.drop.play();
+    private void pieceDropped() {
+        TetrisPanel.drop.play();
         for (int i = 0; i < 4; ++i) {
             int x = curX + curPiece.x(i);
             int y = curY - curPiece.y(i);
@@ -216,24 +206,24 @@ public class Board extends JPanel implements ActionListener {
 
         removeFullLines();
 
-        if (!isFallingFinished)
+        if (!isFallingFinished) {
             newPiece();
+        }
     }
 
-    private void newPiece()
-    {
-    	if(first){
-        nextPiece.setRandomShape();
-    	first = false;
-    	}
+    private void newPiece() {
+        if (first) {
+            nextPiece.setRandomShape();
+            first = false;
+        }
         curPiece.setShape(nextPiece.getShape());
         nextPiece.setRandomShape();
-        Frame.panel.nextPiece = nextPiece; 
+        Frame.panel.nextPiece = nextPiece;
         curX = BoardWidth / 2 + 1;
         curY = BoardHeight - 1 + curPiece.minY();
 
         if (!tryMove(curPiece, curX, curY)) {
-        	TetrisPanel.go1.play();
+            TetrisPanel.go1.play();
             curPiece.setShape(Tetrominoes.NoShape);
             timer.stop();
             isStarted = false;
@@ -244,28 +234,28 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    private boolean tryMove(Shape newPiece, int newX, int newY)
-    {
+    private boolean tryMove(Shape newPiece, int newX, int newY) {
         for (int i = 0; i < 4; ++i) {
             int x = newX + newPiece.x(i);
             int y = newY - newPiece.y(i);
-            if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight)
+            if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) {
                 return false;
-            if (shapeAt(x, y) != Tetrominoes.NoShape)
+            }
+            if (shapeAt(x, y) != Tetrominoes.NoShape) {
                 return false;
+            }
         }
 
         curPiece = newPiece;
         curX = newX;
         curY = newY;
-        
+
         return true;
     }
 
-    private void removeFullLines()
-    {
+    private void removeFullLines() {
         int numFullLines = 0;
-        
+
         for (int i = BoardHeight - 1; i >= 0; --i) {
             boolean lineIsFull = true;
 
@@ -278,101 +268,88 @@ public class Board extends JPanel implements ActionListener {
 
             if (lineIsFull) {
                 ++numFullLines;
-                
 
                 //Blink
-               
-                
-                
-                
                 for (int k = i; k < BoardHeight - 1; ++k) {
-                    for (int j = 0; j < BoardWidth; ++j){
-                    	
-                    	
-                         board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
-                    	
-                    	 
+                    for (int j = 0; j < BoardWidth; ++j) {
+
+                        board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
+
+                    }
+                }
+
+                if (numFullLines > 0) {
+
+                    numLinesRemoved += numFullLines;
+                    linesComp += numFullLines;
+                    isFallingFinished = true;
+                    scoring(numFullLines);
+                    checkLevel();
+                    curPiece.setShape(Tetrominoes.NoShape);
+
                 }
             }
-            
-        
-
-        if (numFullLines > 0) {
-        	
-
-            
-            numLinesRemoved += numFullLines;
-            linesComp += numFullLines;
-            isFallingFinished = true;
-            scoring(numFullLines);
-            checkLevel();
-            curPiece.setShape(Tetrominoes.NoShape);
-            
-        }
-            }
-        }
-     }
-
-    public void checkLevel(){
-    	if(linesComp >= linesTillNext){
-    		level++;
-    		linesComp =0;
-    		linesTillNext += 10;
-    		timer.setDelay(timer.getDelay() - 25);
-    		TetrisPanel.newlevel.play();
-    	}
-    }
-    public void scoring(int numFullLines){
-        if(numFullLines == 1){
-        	TetrisPanel.line.play();
-        score += 40 * (level + 1);
-        }
-        if(numFullLines == 2){
-        	TetrisPanel.line.play();
-        score += 100 * (level + 1);
-        score -= 40 * (level + 1);
-        }
-        if(numFullLines == 3){
-        	TetrisPanel.line.play();
-        score += 300 * (level + 1);
-        score -= 100 * (level + 1);
-        score -= 40 * (level + 1);
-        }
-        if(numFullLines == 4){
-        	TetrisPanel.linefour.play();
-        score += 1200 * (level + 1);
-        score -= 300 * (level + 1);
-        score -= 100 * (level + 1);
-        score -= 40 * (level + 1);
         }
     }
-    private void drawSquare(Graphics g, int x, int y, Tetrominoes shape)
-    {
 
-        
-        if(shape == Tetrominoes.LineShape){
-        	g.drawImage(box[1], x, y, squareWidth(), squareHeight(), null);
+    public void checkLevel() {
+        if (linesComp >= linesTillNext) {
+            level++;
+            linesComp = 0;
+            linesTillNext += 10;
+            timer.setDelay(timer.getDelay() - 25);
+            TetrisPanel.newlevel.play();
         }
-        if(shape == Tetrominoes.MirroredLShape){
-        	g.drawImage(box[2], x, y, squareWidth(), squareHeight(), null);
-        }
-        if(shape == Tetrominoes.LShape){
-        	g.drawImage(box[3], x, y, squareWidth(), squareHeight(), null);
-        }
-        if(shape == Tetrominoes.SquareShape){
-        	g.drawImage(box[4], x, y, squareWidth(), squareHeight(), null);
-        }
-        if(shape == Tetrominoes.SShape){
-        	g.drawImage(box[5], x, y, squareWidth(), squareHeight(), null);
-        }
-        if(shape == Tetrominoes.TShape){
-        	g.drawImage(box[6], x, y, squareWidth(), squareHeight(), null);
-        }
-        if(shape == Tetrominoes.ZShape){
-        	g.drawImage(box[7], x, y, squareWidth(), squareHeight(), null);
-        }
-        
+    }
 
+    public void scoring(int numFullLines) {
+        if (numFullLines == 1) {
+            TetrisPanel.line.play();
+            score += 40 * (level + 1);
+        }
+        if (numFullLines == 2) {
+            TetrisPanel.line.play();
+            score += 100 * (level + 1);
+            score -= 40 * (level + 1);
+        }
+        if (numFullLines == 3) {
+            TetrisPanel.line.play();
+            score += 300 * (level + 1);
+            score -= 100 * (level + 1);
+            score -= 40 * (level + 1);
+        }
+        if (numFullLines == 4) {
+            TetrisPanel.linefour.play();
+            score += 1200 * (level + 1);
+            score -= 300 * (level + 1);
+            score -= 100 * (level + 1);
+            score -= 40 * (level + 1);
+        }
+    }
+
+    private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
+
+        if (shape == Tetrominoes.LineShape) {
+            g.drawImage(box[1], x, y, squareWidth(), squareHeight(), null);
+        }
+        if (shape == Tetrominoes.MirroredLShape) {
+            g.drawImage(box[2], x, y, squareWidth(), squareHeight(), null);
+        }
+        if (shape == Tetrominoes.LShape) {
+            g.drawImage(box[3], x, y, squareWidth(), squareHeight(), null);
+        }
+        if (shape == Tetrominoes.SquareShape) {
+            g.drawImage(box[4], x, y, squareWidth(), squareHeight(), null);
+        }
+        if (shape == Tetrominoes.SShape) {
+            g.drawImage(box[5], x, y, squareWidth(), squareHeight(), null);
+        }
+        if (shape == Tetrominoes.TShape) {
+            g.drawImage(box[6], x, y, squareWidth(), squareHeight(), null);
+        }
+        if (shape == Tetrominoes.ZShape) {
+            g.drawImage(box[7], x, y, squareWidth(), squareHeight(), null);
+        }
 
     }
 }

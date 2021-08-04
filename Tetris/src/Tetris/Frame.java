@@ -34,14 +34,13 @@ public class Frame extends JFrame {
         final JRadioButtonMenuItem aTheme;
         final JRadioButtonMenuItem bTheme;
         final JRadioButtonMenuItem cTheme;
-        
-        
+
         final JRadioButtonMenuItem volume20;
         final JRadioButtonMenuItem volume40;
         final JRadioButtonMenuItem volume60;
         final JRadioButtonMenuItem volume80;
         final JRadioButtonMenuItem volume100;
-        
+
         JCheckBoxMenuItem snd, msc;
 
         menuBar = new JMenuBar();
@@ -59,7 +58,7 @@ public class Frame extends JFrame {
 
         bTheme = new JRadioButtonMenuItem("B Theme");
         cTheme = new JRadioButtonMenuItem("C Theme");
-        
+
         volume20 = new JRadioButtonMenuItem("20%");
         volume40 = new JRadioButtonMenuItem("40%");
         volume60 = new JRadioButtonMenuItem("60%");
@@ -70,7 +69,7 @@ public class Frame extends JFrame {
         music.add(aTheme);
         music.add(bTheme);
         music.add(cTheme);
-        
+
         volume.add(volume20);
         volume.add(volume40);
         volume.add(volume60);
@@ -99,7 +98,7 @@ public class Frame extends JFrame {
         controls.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel.turn.play();
+                TetrisPanel.turn.play();
                 cont.setVisible(true);
             }
         });
@@ -110,10 +109,10 @@ public class Frame extends JFrame {
                 bTheme.setSelected(false);
                 cTheme.setSelected(false);
                 aTheme.setSelected(true);
-                panel.bTheme.stop();
-                panel.cTheme.stop();
-                panel.aTheme.play(true);
-                panel.turn.play();
+                TetrisPanel.bTheme.stop();
+                TetrisPanel.cTheme.stop();
+                TetrisPanel.aTheme.play(true);
+                TetrisPanel.turn.play();
             }
         });
 
@@ -123,10 +122,10 @@ public class Frame extends JFrame {
                 aTheme.setSelected(false);
                 cTheme.setSelected(false);
                 bTheme.setSelected(true);
-                panel.aTheme.stop();
-                panel.cTheme.stop();
-                panel.bTheme.play(true);
-                panel.turn.play();
+                TetrisPanel.aTheme.stop();
+                TetrisPanel.cTheme.stop();
+                TetrisPanel.bTheme.play(true);
+                TetrisPanel.turn.play();
             }
         });
 
@@ -136,20 +135,20 @@ public class Frame extends JFrame {
                 aTheme.setSelected(false);
                 bTheme.setSelected(false);
                 cTheme.setSelected(true);
-                panel.aTheme.stop();
-                panel.bTheme.stop();
-                panel.cTheme.play(true);
-                panel.turn.play();
+                TetrisPanel.aTheme.stop();
+                TetrisPanel.bTheme.stop();
+                TetrisPanel.cTheme.play(true);
+                TetrisPanel.turn.play();
             }
         });
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel.turn.play();
+                TetrisPanel.turn.play();
                 System.exit(1);
             }
         });
-        
+
         volume20.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -161,7 +160,7 @@ public class Frame extends JFrame {
                 TinySound.setGlobalVolume(0.2);
             }
         });
-        
+
         volume40.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -173,7 +172,7 @@ public class Frame extends JFrame {
                 TinySound.setGlobalVolume(0.4);
             }
         });
-        
+
         volume60.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -185,7 +184,7 @@ public class Frame extends JFrame {
                 TinySound.setGlobalVolume(0.6);
             }
         });
-        
+
         volume80.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -197,7 +196,7 @@ public class Frame extends JFrame {
                 TinySound.setGlobalVolume(0.8);
             }
         });
-        
+
         volume100.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -208,18 +207,18 @@ public class Frame extends JFrame {
                 volume100.setSelected(true);
                 TinySound.setGlobalVolume(1.0);
             }
-        });        
+        });
 
         pauseItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel.turn.play();
+                TetrisPanel.turn.play();
                 if (!panel.lose) {
-                    if (panel.pause == false) {
-                        panel.pause = true;
+                    if (false == TetrisPanel.pause) {
+                        TetrisPanel.pause = true;
                         board.timer.stop();
                     } else {
-                        panel.pause = false;
+                        TetrisPanel.pause = false;
                         board.timer.start();
                     }
                 }
@@ -230,16 +229,16 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                panel.turn.play();
+                TetrisPanel.turn.play();
 
                 if (aTheme.isSelected() == true) {
-                    panel.aTheme.play(true);
+                    TetrisPanel.aTheme.play(true);
                 }
                 if (bTheme.isSelected() == true) {
-                    panel.bTheme.play(true);
+                    TetrisPanel.bTheme.play(true);
                 }
                 if (cTheme.isSelected() == true) {
-                    panel.cTheme.play(true);
+                    TetrisPanel.cTheme.play(true);
                 }
                 panel.lose = false;
                 board.clearBoard();

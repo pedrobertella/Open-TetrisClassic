@@ -49,7 +49,7 @@ public class TextTest {
             try {
                 img = ImageIO.read(getClass().getResource("/font.png"));
             } catch (IOException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.toString());
             }
         }
 
@@ -92,9 +92,9 @@ public class TextTest {
             List<BufferedImage> text = convert("Hi mom");
             int x = (getWidth() - (8 * text.size())) / 2;
             int y = (getHeight() - 8) / 2;
-            for (BufferedImage img : text) {
-                g2d.drawImage(img, x, y, this);
-                x += img.getWidth();
+            for (BufferedImage bufImg : text) {
+                g2d.drawImage(bufImg, x, y, this);
+                x += bufImg.getWidth();
             }
             g2d.dispose();
         }
