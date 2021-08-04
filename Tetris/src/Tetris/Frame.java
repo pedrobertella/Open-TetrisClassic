@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.*;
+import kuusisto.tinysound.TinySound;
 
 public class Frame extends JFrame {
 
@@ -28,30 +29,53 @@ public class Frame extends JFrame {
         icon = new ImageIcon("graphics/pieces/6.png").getImage();
         final ControlsWindow cont = new ControlsWindow();
         JMenuBar menuBar;
-        JMenu menu, sounds, music;
+        JMenu menu, sounds, music, volume;
         JMenuItem menuItem, pauseItem, exitItem, controls;
         final JRadioButtonMenuItem aTheme;
         final JRadioButtonMenuItem bTheme;
         final JRadioButtonMenuItem cTheme;
+        
+        
+        final JRadioButtonMenuItem volume20;
+        final JRadioButtonMenuItem volume40;
+        final JRadioButtonMenuItem volume60;
+        final JRadioButtonMenuItem volume80;
+        final JRadioButtonMenuItem volume100;
+        
         JCheckBoxMenuItem snd, msc;
 
         menuBar = new JMenuBar();
         menu = new JMenu("Game");
         sounds = new JMenu("Options");
         music = new JMenu("Music");
+        volume = new JMenu("Volume");
         menuBar.add(menu);
         menuBar.add(sounds);
         sounds.add(music);
+        sounds.add(volume);
 
         aTheme = new JRadioButtonMenuItem("A Theme");
         aTheme.setSelected(true);
 
         bTheme = new JRadioButtonMenuItem("B Theme");
         cTheme = new JRadioButtonMenuItem("C Theme");
+        
+        volume20 = new JRadioButtonMenuItem("20%");
+        volume40 = new JRadioButtonMenuItem("40%");
+        volume60 = new JRadioButtonMenuItem("60%");
+        volume60.setSelected(true);
+        volume80 = new JRadioButtonMenuItem("80%");
+        volume100 = new JRadioButtonMenuItem("100%");
 
         music.add(aTheme);
         music.add(bTheme);
         music.add(cTheme);
+        
+        volume.add(volume20);
+        volume.add(volume40);
+        volume.add(volume60);
+        volume.add(volume80);
+        volume.add(volume100);
 
         snd = new JCheckBoxMenuItem("Sounds");
         snd.setSelected(true);
@@ -125,6 +149,66 @@ public class Frame extends JFrame {
                 System.exit(1);
             }
         });
+        
+        volume20.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volume40.setSelected(false);
+                volume60.setSelected(false);
+                volume80.setSelected(false);
+                volume100.setSelected(false);
+                volume20.setSelected(true);
+                TinySound.setGlobalVolume(0.2);
+            }
+        });
+        
+        volume40.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volume20.setSelected(false);
+                volume60.setSelected(false);
+                volume80.setSelected(false);
+                volume100.setSelected(false);
+                volume40.setSelected(true);
+                TinySound.setGlobalVolume(0.4);
+            }
+        });
+        
+        volume60.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volume40.setSelected(false);
+                volume20.setSelected(false);
+                volume80.setSelected(false);
+                volume100.setSelected(false);
+                volume60.setSelected(true);
+                TinySound.setGlobalVolume(0.6);
+            }
+        });
+        
+        volume80.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volume40.setSelected(false);
+                volume60.setSelected(false);
+                volume20.setSelected(false);
+                volume100.setSelected(false);
+                volume80.setSelected(true);
+                TinySound.setGlobalVolume(0.8);
+            }
+        });
+        
+        volume100.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volume40.setSelected(false);
+                volume60.setSelected(false);
+                volume80.setSelected(false);
+                volume20.setSelected(false);
+                volume100.setSelected(true);
+                TinySound.setGlobalVolume(1.0);
+            }
+        });        
 
         pauseItem.addActionListener(new ActionListener() {
             @Override
