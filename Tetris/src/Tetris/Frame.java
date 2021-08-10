@@ -95,155 +95,118 @@ public class Frame extends JFrame {
                 KeyEvent.VK_T);
         sounds.addSeparator();
 
-        controls.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TetrisPanel.turn.play();
-                cont.setVisible(true);
+        controls.addActionListener((ActionEvent e) -> {
+            TetrisPanel.turn.play();
+            cont.setVisible(true);
+        });
+
+        aTheme.addActionListener((ActionEvent e) -> {
+            bTheme.setSelected(false);
+            cTheme.setSelected(false);
+            aTheme.setSelected(true);
+            TetrisPanel.bTheme.stop();
+            TetrisPanel.cTheme.stop();
+            TetrisPanel.aTheme.play(true);
+            TetrisPanel.turn.play();
+        });
+
+        bTheme.addActionListener((ActionEvent e) -> {
+            aTheme.setSelected(false);
+            cTheme.setSelected(false);
+            bTheme.setSelected(true);
+            TetrisPanel.aTheme.stop();
+            TetrisPanel.cTheme.stop();
+            TetrisPanel.bTheme.play(true);
+            TetrisPanel.turn.play();
+        });
+
+        cTheme.addActionListener((ActionEvent e) -> {
+            aTheme.setSelected(false);
+            bTheme.setSelected(false);
+            cTheme.setSelected(true);
+            TetrisPanel.aTheme.stop();
+            TetrisPanel.bTheme.stop();
+            TetrisPanel.cTheme.play(true);
+            TetrisPanel.turn.play();
+        });
+        exitItem.addActionListener((ActionEvent e) -> {
+            TetrisPanel.turn.play();
+            System.exit(1);
+        });
+
+        volume20.addActionListener((ActionEvent e) -> {
+            volume40.setSelected(false);
+            volume60.setSelected(false);
+            volume80.setSelected(false);
+            volume100.setSelected(false);
+            volume20.setSelected(true);
+            TinySound.setGlobalVolume(0.2);
+        });
+
+        volume40.addActionListener((ActionEvent e) -> {
+            volume20.setSelected(false);
+            volume60.setSelected(false);
+            volume80.setSelected(false);
+            volume100.setSelected(false);
+            volume40.setSelected(true);
+            TinySound.setGlobalVolume(0.4);
+        });
+
+        volume60.addActionListener((ActionEvent e) -> {
+            volume40.setSelected(false);
+            volume20.setSelected(false);
+            volume80.setSelected(false);
+            volume100.setSelected(false);
+            volume60.setSelected(true);
+            TinySound.setGlobalVolume(0.6);
+        });
+
+        volume80.addActionListener((ActionEvent e) -> {
+            volume40.setSelected(false);
+            volume60.setSelected(false);
+            volume20.setSelected(false);
+            volume100.setSelected(false);
+            volume80.setSelected(true);
+            TinySound.setGlobalVolume(0.8);
+        });
+
+        volume100.addActionListener((ActionEvent e) -> {
+            volume40.setSelected(false);
+            volume60.setSelected(false);
+            volume80.setSelected(false);
+            volume20.setSelected(false);
+            volume100.setSelected(true);
+            TinySound.setGlobalVolume(1.0);
+        });
+
+        pauseItem.addActionListener((ActionEvent e) -> {
+            TetrisPanel.turn.play();
+            if (!panel.lose) {
+                if (false == TetrisPanel.pause) {
+                    TetrisPanel.pause = true;
+                    board.timer.stop();
+                } else {
+                    TetrisPanel.pause = false;
+                    board.timer.start();
+                }
             }
         });
 
-        aTheme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                bTheme.setSelected(false);
-                cTheme.setSelected(false);
-                aTheme.setSelected(true);
-                TetrisPanel.bTheme.stop();
-                TetrisPanel.cTheme.stop();
+        menuItem.addActionListener((ActionEvent e) -> {
+            TetrisPanel.turn.play();
+            
+            if (aTheme.isSelected() == true) {
                 TetrisPanel.aTheme.play(true);
-                TetrisPanel.turn.play();
             }
-        });
-
-        bTheme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aTheme.setSelected(false);
-                cTheme.setSelected(false);
-                bTheme.setSelected(true);
-                TetrisPanel.aTheme.stop();
-                TetrisPanel.cTheme.stop();
+            if (bTheme.isSelected() == true) {
                 TetrisPanel.bTheme.play(true);
-                TetrisPanel.turn.play();
             }
-        });
-
-        cTheme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aTheme.setSelected(false);
-                bTheme.setSelected(false);
-                cTheme.setSelected(true);
-                TetrisPanel.aTheme.stop();
-                TetrisPanel.bTheme.stop();
+            if (cTheme.isSelected() == true) {
                 TetrisPanel.cTheme.play(true);
-                TetrisPanel.turn.play();
             }
-        });
-        exitItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TetrisPanel.turn.play();
-                System.exit(1);
-            }
-        });
-
-        volume20.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volume40.setSelected(false);
-                volume60.setSelected(false);
-                volume80.setSelected(false);
-                volume100.setSelected(false);
-                volume20.setSelected(true);
-                TinySound.setGlobalVolume(0.2);
-            }
-        });
-
-        volume40.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volume20.setSelected(false);
-                volume60.setSelected(false);
-                volume80.setSelected(false);
-                volume100.setSelected(false);
-                volume40.setSelected(true);
-                TinySound.setGlobalVolume(0.4);
-            }
-        });
-
-        volume60.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volume40.setSelected(false);
-                volume20.setSelected(false);
-                volume80.setSelected(false);
-                volume100.setSelected(false);
-                volume60.setSelected(true);
-                TinySound.setGlobalVolume(0.6);
-            }
-        });
-
-        volume80.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volume40.setSelected(false);
-                volume60.setSelected(false);
-                volume20.setSelected(false);
-                volume100.setSelected(false);
-                volume80.setSelected(true);
-                TinySound.setGlobalVolume(0.8);
-            }
-        });
-
-        volume100.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volume40.setSelected(false);
-                volume60.setSelected(false);
-                volume80.setSelected(false);
-                volume20.setSelected(false);
-                volume100.setSelected(true);
-                TinySound.setGlobalVolume(1.0);
-            }
-        });
-
-        pauseItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TetrisPanel.turn.play();
-                if (!panel.lose) {
-                    if (false == TetrisPanel.pause) {
-                        TetrisPanel.pause = true;
-                        board.timer.stop();
-                    } else {
-                        TetrisPanel.pause = false;
-                        board.timer.start();
-                    }
-                }
-            }
-        });
-
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                TetrisPanel.turn.play();
-
-                if (aTheme.isSelected() == true) {
-                    TetrisPanel.aTheme.play(true);
-                }
-                if (bTheme.isSelected() == true) {
-                    TetrisPanel.bTheme.play(true);
-                }
-                if (cTheme.isSelected() == true) {
-                    TetrisPanel.cTheme.play(true);
-                }
-                panel.lose = false;
-                board.clearBoard();
-                board.start();
-            }
+            panel.lose = false;
+            board.clearBoard();
+            board.start();
         });
 
         sounds.add(controls);
