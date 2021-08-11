@@ -3,9 +3,9 @@ package Tetris;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
 
 import javax.swing.*;
 import kuusisto.tinysound.TinySound;
@@ -29,8 +29,8 @@ public class Frame extends JFrame {
         icon = new ImageIcon("graphics/pieces/6.png").getImage();
         final ControlsWindow cont = new ControlsWindow();
         JMenuBar menuBar;
-        JMenu menu, sounds, music, volume;
-        JMenuItem menuItem, pauseItem, exitItem, controls;
+        JMenu menu, sounds, music, volume, about;
+        JMenuItem menuItem, pauseItem, exitItem, controls, aboutItem;
         final JRadioButtonMenuItem aTheme;
         final JRadioButtonMenuItem bTheme;
         final JRadioButtonMenuItem cTheme;
@@ -48,8 +48,10 @@ public class Frame extends JFrame {
         sounds = new JMenu("Options");
         music = new JMenu("Music");
         volume = new JMenu("Volume");
+        about = new JMenu("About");
         menuBar.add(menu);
         menuBar.add(sounds);
+        menuBar.add(about);
         sounds.add(music);
         sounds.add(volume);
 
@@ -75,7 +77,7 @@ public class Frame extends JFrame {
         volume.add(volume60);
         volume.add(volume80);
         volume.add(volume100);
-
+        
         snd = new JCheckBoxMenuItem("Sounds");
         snd.setSelected(true);
         msc = new JCheckBoxMenuItem("Music");
@@ -95,6 +97,8 @@ public class Frame extends JFrame {
                 KeyEvent.VK_T);
         sounds.addSeparator();
 
+        aboutItem = new JMenuItem("About...");
+        
         controls.addActionListener((ActionEvent e) -> {
             TetrisPanel.turn.play();
             cont.setVisible(true);
@@ -214,6 +218,7 @@ public class Frame extends JFrame {
         menu.add(pauseItem);
         menu.addSeparator();
         menu.add(exitItem);
+        about.add(aboutItem);
 
         setJMenuBar(menuBar);
         setLayout(null);
@@ -246,6 +251,10 @@ public class Frame extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
             }
+        });
+        
+        aboutItem.addActionListener((ActionEvent e) -> {
+            JOptionPane.showMessageDialog( this, "OpenTetris Classic v1.0-dev 08/10/2021\n\nA full open-source recreation of the 1989 hit game.\n\nOriginally developed by Kyle Bredenkamp.\n\nRefactored and improved by:\nPedro G. K. Bertella\nJailson L. Panizzon\nArthur R. P. So.\n\nGitHub\nhttps://github.com/pedrobertella/OpenTetrisClassic\n", "About OpenTetris Classic", JOptionPane.INFORMATION_MESSAGE);
         });
 
     }
