@@ -40,15 +40,20 @@ public class Board extends JPanel implements ActionListener {
         curPiece = new Shape();
         nextPiece = new Shape();
         timer = new Timer(400, this);
-        String s = System.getProperty("user.dir");
+        Boolean usePrefix = false;
+        String prefix = "";
+        if (usePrefix) {
+            String s = System.getProperty("user.dir");
+            prefix = s + "/Tetris";
+        }
 
-        box[1] = new ImageIcon(s+"/Tetris/graphics/pieces/1boxP1.png").getImage();
-        box[2] = new ImageIcon(s+"/Tetris/graphics/pieces/2box.png").getImage();
-        box[3] = new ImageIcon(s+"/Tetris/graphics/pieces/3box.png").getImage();
-        box[4] = new ImageIcon(s+"/Tetris/graphics/pieces/4box.png").getImage();
-        box[5] = new ImageIcon(s+"/Tetris/graphics/pieces/5box.png").getImage();
-        box[6] = new ImageIcon(s+"/Tetris/graphics/pieces/6box.png").getImage();
-        box[7] = new ImageIcon(s+"/Tetris/graphics/pieces/7box.png").getImage();
+        box[1] = new ImageIcon(prefix+"/graphics/pieces/1boxP1.png").getImage();
+        box[2] = new ImageIcon(prefix+"/graphics/pieces/2box.png").getImage();
+        box[3] = new ImageIcon(prefix+"/graphics/pieces/3box.png").getImage();
+        box[4] = new ImageIcon(prefix+"/graphics/pieces/4box.png").getImage();
+        box[5] = new ImageIcon(prefix+"/graphics/pieces/5box.png").getImage();
+        box[6] = new ImageIcon(prefix+"/graphics/pieces/6box.png").getImage();
+        box[7] = new ImageIcon(prefix+"/graphics/pieces/7box.png").getImage();
 
         board = new Tetrominoes[BoardWidth * BoardHeight];
         clearBoard();

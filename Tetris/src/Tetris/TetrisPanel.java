@@ -46,21 +46,26 @@ public class TetrisPanel extends JPanel implements Runnable {
         TinySound.init();
         nextPiece = new Shape();
         delay = 0;
-       String s = System.getProperty("user.dir");
-        bg = new ImageIcon(s+"/Tetris/graphics/gamebackgroundgamea.png").getImage();
-        go = new ImageIcon(s+"/Tetris/graphics/gameover.png").getImage();
-        ps = new ImageIcon(s+"/Tetris/graphics/pause.png").getImage();
-        we = new ImageIcon(s+"/Tetris/graphics/welcome.png").getImage();
+        Boolean usePrefix = false;
+        String prefix = "";
+        if (usePrefix) {
+            String s = System.getProperty("user.dir");
+            prefix = s + "/Tetris";
+        }
+        bg = new ImageIcon(prefix + "/graphics/gamebackgroundgamea.png").getImage();
+        go = new ImageIcon(prefix + "/graphics/gameover.png").getImage();
+        ps = new ImageIcon(prefix + "/graphics/pause.png").getImage();
+        we = new ImageIcon(prefix + "/graphics/welcome.png").getImage();
 
         box = new Image[8];
 
-        box[1] = new ImageIcon(s+"/Tetris/graphics/pieces/1.png").getImage();
-        box[2] = new ImageIcon(s+"/Tetris/graphics/pieces/2.png").getImage();
-        box[3] = new ImageIcon(s+"/Tetris/graphics/pieces/3.png").getImage();
-        box[4] = new ImageIcon(s+"/Tetris/graphics/pieces/4.png").getImage();
-        box[5] = new ImageIcon(s+"/Tetris/graphics/pieces/5.png").getImage();
-        box[6] = new ImageIcon(s+"/Tetris/graphics/pieces/6.png").getImage();
-        box[7] = new ImageIcon(s+"/Tetris/graphics/pieces/7.png").getImage();
+        box[1] = new ImageIcon(prefix + "/graphics/pieces/1.png").getImage();
+        box[2] = new ImageIcon(prefix + "/graphics/pieces/2.png").getImage();
+        box[3] = new ImageIcon(prefix + "/graphics/pieces/3.png").getImage();
+        box[4] = new ImageIcon(prefix + "/graphics/pieces/4.png").getImage();
+        box[5] = new ImageIcon(prefix + "/graphics/pieces/5.png").getImage();
+        box[6] = new ImageIcon(prefix + "/graphics/pieces/6.png").getImage();
+        box[7] = new ImageIcon(prefix + "/graphics/pieces/7.png").getImage();
 
         turn = TinySound.loadSound("sounds/turn.wav");
         move = TinySound.loadSound("sounds/move.wav");
@@ -121,7 +126,7 @@ public class TetrisPanel extends JPanel implements Runnable {
     }
 
     public void init(Frame arg0) {
-        //Just Start The Thread...
+        // Just Start The Thread...
         thread.start();
 
     }
@@ -194,25 +199,39 @@ public class TetrisPanel extends JPanel implements Runnable {
         }
 
         if (!lose && nextPiece.getShape() == Tetrominoes.LineShape) {
-            g.drawImage(box[1], (595 + ((170 - (box[1].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[1].getHeight(null) * 5)) / 2)), box[1].getWidth(null) * 5, box[1].getHeight(null) * 5, null);
+            g.drawImage(box[1], (595 + ((170 - (box[1].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[1].getHeight(null) * 5)) / 2)), box[1].getWidth(null) * 5,
+                    box[1].getHeight(null) * 5, null);
         }
         if (!lose && nextPiece.getShape() == Tetrominoes.MirroredLShape) {
-            g.drawImage(box[2], (595 + ((170 - (box[2].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[2].getHeight(null) * 5)) / 2)), box[2].getWidth(null) * 5, box[2].getHeight(null) * 5, null);
+            g.drawImage(box[2], (595 + ((170 - (box[2].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[2].getHeight(null) * 5)) / 2)), box[2].getWidth(null) * 5,
+                    box[2].getHeight(null) * 5, null);
         }
         if (!lose && nextPiece.getShape() == Tetrominoes.LShape) {
-            g.drawImage(box[3], (595 + ((170 - (box[3].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[3].getHeight(null) * 5)) / 2)), box[3].getWidth(null) * 5, box[3].getHeight(null) * 5, null);
+            g.drawImage(box[3], (595 + ((170 - (box[3].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[3].getHeight(null) * 5)) / 2)), box[3].getWidth(null) * 5,
+                    box[3].getHeight(null) * 5, null);
         }
         if (!lose && nextPiece.getShape() == Tetrominoes.SquareShape) {
-            g.drawImage(box[4], (595 + ((170 - (box[4].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[4].getHeight(null) * 5)) / 2)), box[4].getWidth(null) * 5, box[4].getHeight(null) * 5, null);
+            g.drawImage(box[4], (595 + ((170 - (box[4].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[4].getHeight(null) * 5)) / 2)), box[4].getWidth(null) * 5,
+                    box[4].getHeight(null) * 5, null);
         }
         if (!lose && nextPiece.getShape() == Tetrominoes.SShape) {
-            g.drawImage(box[5], (595 + ((170 - (box[5].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[5].getHeight(null) * 5)) / 2)), box[5].getWidth(null) * 5, box[5].getHeight(null) * 5, null);
+            g.drawImage(box[5], (595 + ((170 - (box[5].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[5].getHeight(null) * 5)) / 2)), box[5].getWidth(null) * 5,
+                    box[5].getHeight(null) * 5, null);
         }
         if (!lose && nextPiece.getShape() == Tetrominoes.TShape) {
-            g.drawImage(box[6], (595 + ((170 - (box[6].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[6].getHeight(null) * 5)) / 2)), box[6].getWidth(null) * 5, box[6].getHeight(null) * 5, null);
+            g.drawImage(box[6], (595 + ((170 - (box[6].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[6].getHeight(null) * 5)) / 2)), box[6].getWidth(null) * 5,
+                    box[6].getHeight(null) * 5, null);
         }
         if (!lose && nextPiece.getShape() == Tetrominoes.ZShape) {
-            g.drawImage(box[7], (595 + ((170 - (box[7].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[7].getHeight(null) * 5)) / 2)), box[7].getWidth(null) * 5, box[7].getHeight(null) * 5, null);
+            g.drawImage(box[7], (595 + ((170 - (box[7].getWidth(null) * 5)) / 2)),
+                    (515 + ((170 - (box[7].getHeight(null) * 5)) / 2)), box[7].getWidth(null) * 5,
+                    box[7].getHeight(null) * 5, null);
         }
 
     }
