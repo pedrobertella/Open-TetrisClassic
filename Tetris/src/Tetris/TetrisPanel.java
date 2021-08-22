@@ -193,25 +193,25 @@ public class TetrisPanel extends JPanel implements Runnable {
             g.drawImage(we, 75, 0, 400, 720, null);
         }
 
-        if (nextPiece.getShape() == Tetrominoes.LineShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.LineShape) {
             g.drawImage(box[1], (595 + ((170 - (box[1].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[1].getHeight(null) * 5)) / 2)), box[1].getWidth(null) * 5, box[1].getHeight(null) * 5, null);
         }
-        if (nextPiece.getShape() == Tetrominoes.MirroredLShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.MirroredLShape) {
             g.drawImage(box[2], (595 + ((170 - (box[2].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[2].getHeight(null) * 5)) / 2)), box[2].getWidth(null) * 5, box[2].getHeight(null) * 5, null);
         }
-        if (nextPiece.getShape() == Tetrominoes.LShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.LShape) {
             g.drawImage(box[3], (595 + ((170 - (box[3].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[3].getHeight(null) * 5)) / 2)), box[3].getWidth(null) * 5, box[3].getHeight(null) * 5, null);
         }
-        if (nextPiece.getShape() == Tetrominoes.SquareShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.SquareShape) {
             g.drawImage(box[4], (595 + ((170 - (box[4].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[4].getHeight(null) * 5)) / 2)), box[4].getWidth(null) * 5, box[4].getHeight(null) * 5, null);
         }
-        if (nextPiece.getShape() == Tetrominoes.SShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.SShape) {
             g.drawImage(box[5], (595 + ((170 - (box[5].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[5].getHeight(null) * 5)) / 2)), box[5].getWidth(null) * 5, box[5].getHeight(null) * 5, null);
         }
-        if (nextPiece.getShape() == Tetrominoes.TShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.TShape) {
             g.drawImage(box[6], (595 + ((170 - (box[6].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[6].getHeight(null) * 5)) / 2)), box[6].getWidth(null) * 5, box[6].getHeight(null) * 5, null);
         }
-        if (nextPiece.getShape() == Tetrominoes.ZShape) {
+        if (!lose && nextPiece.getShape() == Tetrominoes.ZShape) {
             g.drawImage(box[7], (595 + ((170 - (box[7].getWidth(null) * 5)) / 2)), (515 + ((170 - (box[7].getHeight(null) * 5)) / 2)), box[7].getWidth(null) * 5, box[7].getHeight(null) * 5, null);
         }
 
