@@ -50,22 +50,22 @@ public class TetrisPanel extends JPanel implements Runnable {
         String prefix = "";
         if (usePrefix) {
             String s = System.getProperty("user.dir");
-            prefix = s + "/Tetris";
+            prefix = s + "/Tetris/";
         }
-        bg = new ImageIcon(prefix + "/graphics/gamebackgroundgamea.png").getImage();
-        go = new ImageIcon(prefix + "/graphics/gameover.png").getImage();
-        ps = new ImageIcon(prefix + "/graphics/pause.png").getImage();
-        we = new ImageIcon(prefix + "/graphics/welcome.png").getImage();
+        bg = new ImageIcon(prefix + "graphics/gamebackgroundgamea.png").getImage();
+        go = new ImageIcon(prefix + "graphics/gameover.png").getImage();
+        ps = new ImageIcon(prefix + "graphics/pause.png").getImage();
+        we = new ImageIcon(prefix + "graphics/welcome.png").getImage();
 
         box = new Image[8];
 
-        box[1] = new ImageIcon(prefix + "/graphics/pieces/1.png").getImage();
-        box[2] = new ImageIcon(prefix + "/graphics/pieces/2.png").getImage();
-        box[3] = new ImageIcon(prefix + "/graphics/pieces/3.png").getImage();
-        box[4] = new ImageIcon(prefix + "/graphics/pieces/4.png").getImage();
-        box[5] = new ImageIcon(prefix + "/graphics/pieces/5.png").getImage();
-        box[6] = new ImageIcon(prefix + "/graphics/pieces/6.png").getImage();
-        box[7] = new ImageIcon(prefix + "/graphics/pieces/7.png").getImage();
+        box[1] = new ImageIcon(prefix + "graphics/pieces/1.png").getImage();
+        box[2] = new ImageIcon(prefix + "graphics/pieces/2.png").getImage();
+        box[3] = new ImageIcon(prefix + "graphics/pieces/3.png").getImage();
+        box[4] = new ImageIcon(prefix + "graphics/pieces/4.png").getImage();
+        box[5] = new ImageIcon(prefix + "graphics/pieces/5.png").getImage();
+        box[6] = new ImageIcon(prefix + "graphics/pieces/6.png").getImage();
+        box[7] = new ImageIcon(prefix + "graphics/pieces/7.png").getImage();
 
         turn = TinySound.loadSound("sounds/turn.wav");
         move = TinySound.loadSound("sounds/move.wav");
