@@ -46,20 +46,21 @@ public class TetrisPanel extends JPanel implements Runnable {
         TinySound.init();
         nextPiece = new Shape();
         delay = 0;
-        bg = new ImageIcon("graphics/gamebackgroundgamea.png").getImage();
-        go = new ImageIcon("graphics/gameover.png").getImage();
-        ps = new ImageIcon("graphics/pause.png").getImage();
-        we = new ImageIcon("graphics/welcome.png").getImage();
+       String s = System.getProperty("user.dir");
+        bg = new ImageIcon(s+"/Tetris/graphics/gamebackgroundgamea.png").getImage();
+        go = new ImageIcon(s+"/Tetris/graphics/gameover.png").getImage();
+        ps = new ImageIcon(s+"/Tetris/graphics/pause.png").getImage();
+        we = new ImageIcon(s+"/Tetris/graphics/welcome.png").getImage();
 
         box = new Image[8];
 
-        box[1] = new ImageIcon("graphics/pieces/1.png").getImage();
-        box[2] = new ImageIcon("graphics/pieces/2.png").getImage();
-        box[3] = new ImageIcon("graphics/pieces/3.png").getImage();
-        box[4] = new ImageIcon("graphics/pieces/4.png").getImage();
-        box[5] = new ImageIcon("graphics/pieces/5.png").getImage();
-        box[6] = new ImageIcon("graphics/pieces/6.png").getImage();
-        box[7] = new ImageIcon("graphics/pieces/7.png").getImage();
+        box[1] = new ImageIcon(s+"/Tetris/graphics/pieces/1.png").getImage();
+        box[2] = new ImageIcon(s+"/Tetris/graphics/pieces/2.png").getImage();
+        box[3] = new ImageIcon(s+"/Tetris/graphics/pieces/3.png").getImage();
+        box[4] = new ImageIcon(s+"/Tetris/graphics/pieces/4.png").getImage();
+        box[5] = new ImageIcon(s+"/Tetris/graphics/pieces/5.png").getImage();
+        box[6] = new ImageIcon(s+"/Tetris/graphics/pieces/6.png").getImage();
+        box[7] = new ImageIcon(s+"/Tetris/graphics/pieces/7.png").getImage();
 
         turn = TinySound.loadSound("sounds/turn.wav");
         move = TinySound.loadSound("sounds/move.wav");
