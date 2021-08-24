@@ -47,13 +47,13 @@ public class Board extends JPanel implements ActionListener {
             prefix = s + "/Tetris/";
         }
 
-        box[1] = new ImageIcon(prefix+"graphics/pieces/1boxP1.png").getImage();
-        box[2] = new ImageIcon(prefix+"graphics/pieces/2box.png").getImage();
-        box[3] = new ImageIcon(prefix+"graphics/pieces/3box.png").getImage();
-        box[4] = new ImageIcon(prefix+"graphics/pieces/4box.png").getImage();
-        box[5] = new ImageIcon(prefix+"graphics/pieces/5box.png").getImage();
-        box[6] = new ImageIcon(prefix+"graphics/pieces/6box.png").getImage();
-        box[7] = new ImageIcon(prefix+"graphics/pieces/7box.png").getImage();
+        box[1] = new ImageIcon(prefix + "graphics/pieces/1boxP1.png").getImage();
+        box[2] = new ImageIcon(prefix + "graphics/pieces/2box.png").getImage();
+        box[3] = new ImageIcon(prefix + "graphics/pieces/3box.png").getImage();
+        box[4] = new ImageIcon(prefix + "graphics/pieces/4box.png").getImage();
+        box[5] = new ImageIcon(prefix + "graphics/pieces/5box.png").getImage();
+        box[6] = new ImageIcon(prefix + "graphics/pieces/6box.png").getImage();
+        box[7] = new ImageIcon(prefix + "graphics/pieces/7box.png").getImage();
 
         board = new Tetrominoes[BoardWidth * BoardHeight];
         clearBoard();
@@ -333,29 +333,30 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    private int getShapeIndex(Tetrominoes shape) {
+        switch (shape) {
+            case LineShape:
+                return 1;
+            case MirroredLShape:
+                return 2;
+            case LShape:
+                return 3;
+            case SquareShape:
+                return 4;
+            case SShape:
+                return 5;
+            case TShape:
+                return 6;
+            case ZShape:
+                return 7;
+            default:
+                return 7;
+        }
+    }
+
     private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
-
-        if (shape == Tetrominoes.LineShape) {
-            g.drawImage(box[1], x, y, squareWidth(), squareHeight(), null);
-        }
-        if (shape == Tetrominoes.MirroredLShape) {
-            g.drawImage(box[2], x, y, squareWidth(), squareHeight(), null);
-        }
-        if (shape == Tetrominoes.LShape) {
-            g.drawImage(box[3], x, y, squareWidth(), squareHeight(), null);
-        }
-        if (shape == Tetrominoes.SquareShape) {
-            g.drawImage(box[4], x, y, squareWidth(), squareHeight(), null);
-        }
-        if (shape == Tetrominoes.SShape) {
-            g.drawImage(box[5], x, y, squareWidth(), squareHeight(), null);
-        }
-        if (shape == Tetrominoes.TShape) {
-            g.drawImage(box[6], x, y, squareWidth(), squareHeight(), null);
-        }
-        if (shape == Tetrominoes.ZShape) {
-            g.drawImage(box[7], x, y, squareWidth(), squareHeight(), null);
-        }
-
+        
+        g.drawImage(box[getShapeIndex(shape)], x, y, squareWidth(), squareHeight(), null);
+        
     }
 }
