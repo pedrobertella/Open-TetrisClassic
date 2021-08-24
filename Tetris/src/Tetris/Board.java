@@ -309,27 +309,23 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void scoring(int numFullLines) {
-        if (numFullLines == 1) {
-            TetrisPanel.line.play();
-            score += 40 * (level + 1);
-        }
+    	int levelMultiplier = level + 1;
+    	
+    	if (numFullLines == 1){
+    		TetrisPanel.line.play();
+    		score += 40 * levelMultiplier;
+    	}
         if (numFullLines == 2) {
             TetrisPanel.line.play();
-            score += 100 * (level + 1);
-            score -= 40 * (level + 1);
+            score += 60 * levelMultiplier;
         }
         if (numFullLines == 3) {
             TetrisPanel.line.play();
-            score += 300 * (level + 1);
-            score -= 100 * (level + 1);
-            score -= 40 * (level + 1);
+            score += 160 * levelMultiplier;
         }
         if (numFullLines == 4) {
             TetrisPanel.linefour.play();
-            score += 1200 * (level + 1);
-            score -= 300 * (level + 1);
-            score -= 100 * (level + 1);
-            score -= 40 * (level + 1);
+            score += 760 * levelMultiplier;
         }
     }
 
