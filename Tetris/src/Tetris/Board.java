@@ -40,7 +40,7 @@ public class Board extends JPanel implements ActionListener {
         curPiece = new Shape();
         nextPiece = new Shape();
         timer = new Timer(400, this);
-        Boolean usePrefix = false;
+        Boolean usePrefix = true;
         String prefix = "";
         if (usePrefix) {
             String s = System.getProperty("user.dir");
@@ -119,6 +119,14 @@ public class Board extends JPanel implements ActionListener {
             return;
         }
 
+        resetPanel();
+        first = true;
+        newPiece();
+
+        timer.start();
+    }
+
+    public void resetPanel(){
         isStarted = true;
         isFallingFinished = false;
         numLinesRemoved = 0;
@@ -129,10 +137,6 @@ public class Board extends JPanel implements ActionListener {
         timer.setDelay(400);
         clearBoard();
 
-        first = true;
-        newPiece();
-
-        timer.start();
     }
 
     private void pause() {
