@@ -133,7 +133,6 @@ public class TetrisPanel extends JPanel implements Runnable {
 
     public void keyboardEvent(KeyEvent e) {
 
-        String keyChar = Character.toString(e.getKeyChar());
 
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
