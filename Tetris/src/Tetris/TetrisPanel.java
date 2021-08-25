@@ -46,7 +46,7 @@ public class TetrisPanel extends JPanel implements Runnable {
         TinySound.init();
         nextPiece = new Shape();
         delay = 0;
-        Boolean usePrefix = false;
+        Boolean usePrefix = true;
         String prefix = "";
         if (usePrefix) {
             String s = System.getProperty("user.dir");
@@ -139,12 +139,11 @@ public class TetrisPanel extends JPanel implements Runnable {
 
             if (!lose) {
                 if (pause == false) {
-                    pause = true;
                     Frame.board.timer.stop();
                 } else {
-                    pause = false;
                     Frame.board.timer.start();
                 }
+                pause = !pause;
             }
         }
 
