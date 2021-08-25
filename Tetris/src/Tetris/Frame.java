@@ -35,6 +35,7 @@ public class Frame extends JFrame {
         final JRadioButtonMenuItem bTheme;
         final JRadioButtonMenuItem cTheme;
 
+        final JRadioButtonMenuItem volume0;
         final JRadioButtonMenuItem volume20;
         final JRadioButtonMenuItem volume40;
         final JRadioButtonMenuItem volume60;
@@ -61,6 +62,7 @@ public class Frame extends JFrame {
         bTheme = new JRadioButtonMenuItem("B Theme");
         cTheme = new JRadioButtonMenuItem("C Theme");
 
+        volume0 = new JRadioButtonMenuItem("0%");
         volume20 = new JRadioButtonMenuItem("20%");
         volume40 = new JRadioButtonMenuItem("40%");
         volume60 = new JRadioButtonMenuItem("60%");
@@ -72,6 +74,7 @@ public class Frame extends JFrame {
         music.add(bTheme);
         music.add(cTheme);
 
+        volume.add(volume0);
         volume.add(volume20);
         volume.add(volume40);
         volume.add(volume60);
@@ -138,12 +141,23 @@ public class Frame extends JFrame {
             System.exit(1);
         });
 
+        volume0.addActionListener((ActionEvent e) -> {
+            volume40.setSelected(false);
+            volume60.setSelected(false);
+            volume80.setSelected(false);
+            volume100.setSelected(false);
+            volume20.setSelected(false);
+            volume0.setSelected(true);
+            TinySound.setGlobalVolume(0);
+        });
+        
         volume20.addActionListener((ActionEvent e) -> {
             volume40.setSelected(false);
             volume60.setSelected(false);
             volume80.setSelected(false);
             volume100.setSelected(false);
             volume20.setSelected(true);
+            volume0.setSelected(false);
             TinySound.setGlobalVolume(0.2);
         });
 
@@ -153,6 +167,7 @@ public class Frame extends JFrame {
             volume80.setSelected(false);
             volume100.setSelected(false);
             volume40.setSelected(true);
+            volume0.setSelected(false);
             TinySound.setGlobalVolume(0.4);
         });
 
@@ -162,6 +177,7 @@ public class Frame extends JFrame {
             volume80.setSelected(false);
             volume100.setSelected(false);
             volume60.setSelected(true);
+            volume0.setSelected(false);
             TinySound.setGlobalVolume(0.6);
         });
 
@@ -171,6 +187,7 @@ public class Frame extends JFrame {
             volume20.setSelected(false);
             volume100.setSelected(false);
             volume80.setSelected(true);
+            volume0.setSelected(false);
             TinySound.setGlobalVolume(0.8);
         });
 
@@ -180,6 +197,7 @@ public class Frame extends JFrame {
             volume80.setSelected(false);
             volume20.setSelected(false);
             volume100.setSelected(true);
+            volume0.setSelected(false);
             TinySound.setGlobalVolume(1.0);
         });
 
