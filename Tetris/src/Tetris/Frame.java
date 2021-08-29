@@ -20,6 +20,13 @@ public class Frame extends JFrame {
     public static Image icon;
     public static Board board = new Board();
 
+    final JRadioButtonMenuItem volume0;
+    final JRadioButtonMenuItem volume20;
+    final JRadioButtonMenuItem volume40;
+    final JRadioButtonMenuItem volume60;
+    final JRadioButtonMenuItem volume80;
+    final JRadioButtonMenuItem volume100;
+
     public Frame() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -34,13 +41,6 @@ public class Frame extends JFrame {
         final JRadioButtonMenuItem aTheme;
         final JRadioButtonMenuItem bTheme;
         final JRadioButtonMenuItem cTheme;
-
-        final JRadioButtonMenuItem volume0;
-        final JRadioButtonMenuItem volume20;
-        final JRadioButtonMenuItem volume40;
-        final JRadioButtonMenuItem volume60;
-        final JRadioButtonMenuItem volume80;
-        final JRadioButtonMenuItem volume100;
 
         JCheckBoxMenuItem snd, msc;
 
@@ -80,7 +80,7 @@ public class Frame extends JFrame {
         volume.add(volume60);
         volume.add(volume80);
         volume.add(volume100);
-        
+
         snd = new JCheckBoxMenuItem("Sounds");
         snd.setSelected(true);
         msc = new JCheckBoxMenuItem("Music");
@@ -101,7 +101,7 @@ public class Frame extends JFrame {
         sounds.addSeparator();
 
         aboutItem = new JMenuItem("About...");
-        
+
         controls.addActionListener((ActionEvent e) -> {
             TetrisPanel.turn.play();
             cont.setVisible(true);
@@ -142,63 +142,33 @@ public class Frame extends JFrame {
         });
 
         volume0.addActionListener((ActionEvent e) -> {
-            volume40.setSelected(false);
-            volume60.setSelected(false);
-            volume80.setSelected(false);
-            volume100.setSelected(false);
-            volume20.setSelected(false);
+            setVolumeFromMenu(0);
             volume0.setSelected(true);
-            TinySound.setGlobalVolume(0);
-        });
-        
-        volume20.addActionListener((ActionEvent e) -> {
-            volume40.setSelected(false);
-            volume60.setSelected(false);
-            volume80.setSelected(false);
-            volume100.setSelected(false);
-            volume20.setSelected(true);
-            volume0.setSelected(false);
-            TinySound.setGlobalVolume(0.2);
         });
 
-        volume40.addActionListener((ActionEvent e) -> {
-            volume20.setSelected(false);
-            volume60.setSelected(false);
-            volume80.setSelected(false);
-            volume100.setSelected(false);
+        volume20.addActionListener((ActionEvent e) -> {
+            setVolumeFromMenu(0.2);
+            volume20.setSelected(true);
+        });
+
+        volume40.addActionListener((ActionEvent e) -> {            
+            setVolumeFromMenu(0.4);
             volume40.setSelected(true);
-            volume0.setSelected(false);
-            TinySound.setGlobalVolume(0.4);
         });
 
         volume60.addActionListener((ActionEvent e) -> {
-            volume40.setSelected(false);
-            volume20.setSelected(false);
-            volume80.setSelected(false);
-            volume100.setSelected(false);
+            setVolumeFromMenu(0.6);
             volume60.setSelected(true);
-            volume0.setSelected(false);
-            TinySound.setGlobalVolume(0.6);
         });
 
         volume80.addActionListener((ActionEvent e) -> {
-            volume40.setSelected(false);
-            volume60.setSelected(false);
-            volume20.setSelected(false);
-            volume100.setSelected(false);
+            setVolumeFromMenu(0.8);
             volume80.setSelected(true);
-            volume0.setSelected(false);
-            TinySound.setGlobalVolume(0.8);
         });
 
         volume100.addActionListener((ActionEvent e) -> {
-            volume40.setSelected(false);
-            volume60.setSelected(false);
-            volume80.setSelected(false);
-            volume20.setSelected(false);
+            setVolumeFromMenu(1.0);
             volume100.setSelected(true);
-            volume0.setSelected(false);
-            TinySound.setGlobalVolume(1.0);
         });
 
         pauseItem.addActionListener((ActionEvent e) -> {
@@ -216,7 +186,7 @@ public class Frame extends JFrame {
 
         menuItem.addActionListener((ActionEvent e) -> {
             TetrisPanel.turn.play();
-            
+
             if (aTheme.isSelected() == true) {
                 TetrisPanel.aTheme.play(true);
             }
@@ -270,11 +240,21 @@ public class Frame extends JFrame {
             public void keyReleased(KeyEvent e) {
             }
         });
-        
+
         aboutItem.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog( this, "OpenTetris Classic v1.0-dev 08/10/2021\n\nA full open-source recreation of the 1989 hit game.\n\nOriginally developed by Kyle Bredenkamp.\n\nRefactored and improved by:\nPedro G. K. Bertella\nJailson L. Panizzon\nArthur R. P. So.\n\nGitHub\nhttps://github.com/pedrobertella/OpenTetrisClassic\n", "About OpenTetris Classic", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "OpenTetris Classic v1.0-dev 08/10/2021\n\nA full open-source recreation of the 1989 hit game.\n\nOriginally developed by Kyle Bredenkamp.\n\nRefactored and improved by:\nPedro G. K. Bertella\nJailson L. Panizzon\nArthur R. P. So.\n\nGitHub\nhttps://github.com/pedrobertella/OpenTetrisClassic\n", "About OpenTetris Classic", JOptionPane.INFORMATION_MESSAGE);
         });
 
+    }
+
+    public void setVolumeFromMenu(double val) {
+        volume40.setSelected(false);
+        volume60.setSelected(false);
+        volume80.setSelected(false);
+        volume20.setSelected(false);
+        volume100.setSelected(false);
+        volume0.setSelected(false);
+        TinySound.setGlobalVolume(val);
     }
 
     public static void main(String[] args) {
